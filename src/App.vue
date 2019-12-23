@@ -1,9 +1,17 @@
 <template>
   <div id="app">
-    <router-view/>
+    <cz-head></cz-head>
+    <router-view></router-view>
   </div>
 </template>
-
+<script>
+import czHead from './views/cz-header/index'
+export default {
+    components: {
+        czHead
+    }
+}
+</script>
 <style lang="less">
 @import url('../src/assets/css/index.less');
 #app {

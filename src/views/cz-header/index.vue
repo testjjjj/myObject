@@ -45,10 +45,11 @@
             </div>
             <!-- 登录/注册、写博客 -->
             <div class="hd-use fd-r">
-                <div class="hd-use-login fd-r">
-                    <span>登录/注册</span>
+                <div class="fd-r">
+                    <span class="hd-use-login" @click="openLogin('login')">登录</span>&sdot;
+                    <span class="hd-use-login" @click="openLogin('regist')">注册</span>
                 </div>
-                <div class="hd-use-write fd-r">
+                <div class="hd-use-write fd-r" @click="goWrite">
                     <span>写博文</span>
                 </div>
             </div>
@@ -60,16 +61,23 @@
                     </el-input>
                 </div>
             </div>
+            <!-- 登录注册弹窗 -->
+            <login :type="type"></login>
         </div>
     </header>
 </template>
 <script>
+import login from '../login/index'
 export default {
+    components: {
+        login
+    },
     data() {
         return {
             defalte_menu_index: 'home',  // 默认菜单index
             isPC: true, // 菜单按pc端显示
-            screenWidth: document.body.clientWidth  // 屏幕width
+            screenWidth: document.body.clientWidth,  // 屏幕width
+            type: ''   // 登录或注册title
         }
     },
     watch: {
@@ -97,6 +105,18 @@ export default {
          */
         handleSelect(key) {
             key === this.$route.path ? '' : this.$router.push(key)
+        },
+        /**
+         * 打开登录注册弹窗
+         */
+        openLogin(index) {
+            this.type = index
+        },
+        /**
+         * 跳转写文章
+         */
+        goWrite() {
+            this.$router.push('/write')
         }
     }
 }
@@ -141,13 +161,13 @@ header{
             color: #909399;
             transition: 0.7s;
             border-radius: 3px;
-            &:hover{
-                color: black;
-                cursor: pointer;
-                background-color: #88888824;
-            }
-            span{
+            cursor: pointer;
+            .hd-use-login{
                 font-size: 14px;
+                transition: 0.7s;
+                &:hover{
+                    color: #0371df;
+                }
             }
         }
         .hd-use-write{

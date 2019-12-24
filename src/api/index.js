@@ -7,10 +7,12 @@
  * @FilePath: \display\src\api\index.js
  */
 import home from './home'
+import user from './user'
 
 /**
  * 统一管理api
  */
 export default {
-    home
+    home,
+    user
 }

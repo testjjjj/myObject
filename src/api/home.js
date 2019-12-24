@@ -3,8 +3,8 @@ export default {
         url: '/home/getPm',
         method: 'get'
     },
-    getArticle: {   // 首页-文章列表
-        url: '/home/getArticle',
+    queryListByType: {   // 首页-文章列表
+        url: '/gateway/blog/queryListByType',
         method: 'post'
     }
 }

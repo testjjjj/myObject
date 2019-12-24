@@ -2,7 +2,7 @@
     "getPm": {
         "age": 11
     },
-    "getArticle": {
+    "queryListByType": {
         "data|10": [
             {
                 "author": {

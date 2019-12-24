@@ -39,11 +39,16 @@ export default {
         this.getData(this.type)
     },
     methods: {
-        getData(index) {
-            this.$axios.post(this.$api.home.getArticle.url, {type: index}).then(res => {
+        getData() {
+            let param = {
+                type: 0,
+                pageNum: 1,
+                pageSize: 15
+            }
+            this.$axios.post(this.$api.home.queryListByType.url, param).then(res => {
                 if(res.data.data.length) {
                     this.articleList = res.data.data
-                    console.log(this.articleList)
+                    console.log(JSON.stringify(this.articleList[0]))
                 } else {
                     this.$message({
                         message: '暂无数据',

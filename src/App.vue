@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="app"  style="height:100%;overflow:auto" v-infinite-scroll="load">
     <cz-head></cz-head>
     <router-view></router-view>
   </div>
@@ -9,6 +9,11 @@ import czHead from './views/cz-header/index'
 export default {
     components: {
         czHead
+    },
+    methods: {
+      load(){
+            console.log(1111)
+        },
     }
 }
 </script>

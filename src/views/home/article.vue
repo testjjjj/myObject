@@ -11,12 +11,12 @@
                 <div class="content">
                     <div class="author">
                         <span class="red dian">热</span>
-                        <span class="dian author-hover">{{item.author.name}}</span>
-                        <span class="author-hover">{{item.author.specialName}}</span>
-                        <star :starNum="item.star" :commentNum="item.comment" :viewNum="item.view"></star>
+                        <span class="dian author-hover">{{item.author.nickName}}</span>
+                        <span class="author-hover">{{item.subject.subjectName}}</span>
+                        <star :starNum="item.favourSum" :commentNum="item.commentSum" :viewNum="item.visitSum"></star>
                     </div>
-                    <div class="title fd-textover">java的不拉不拉当时的方式不拉不拉</div>
-                    <div class="abstract fd-textover">java在经济案鼎折覆餗对方是否的说法是件结案件案件骄傲骄傲骄傲叫骄傲骄傲骄傲骄傲叫姐姐爱就爱经济案件聚焦</div>
+                    <div class="title fd-textover">{{item.title}}</div>
+                    <div class="abstract fd-textover">{{item.summary}}</div>
                 </div>
             </li>
         </ul>
@@ -32,13 +32,16 @@ export default {
     data() {
         return {
             type: 0,     // 文章列表类型0：最热，1：最新
-            articleList: []
+            articleList: [] // 文章列表数据
         }
     },
     mounted() {
         this.getData(this.type)
     },
     methods: {
+        /**
+         * 请求文章列表
+         */
         getData() {
             let param = {
                 type: 0,
@@ -46,9 +49,8 @@ export default {
                 pageSize: 15
             }
             this.$axios.post(this.$api.home.queryListByType.url, param).then(res => {
-                if(res.data.data.length) {
-                    this.articleList = res.data.data
-                    console.log(JSON.stringify(this.articleList[0]))
+                if(res.data) {
+                    this.articleList = res.data.pageList
                 } else {
                     this.$message({
                         message: '暂无数据',

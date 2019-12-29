@@ -27,7 +27,9 @@ function apiAxios (method, url, params = null) {
             data: method === 'POST' ? params : null,
             timeout: 1000
         }).then(response => {
-            resolve(response)
+            if (response.status == 200){
+                resolve(response.data)
+            }
         }).catch(err => {
             reject(err)
         })

@@ -2,44 +2,12 @@
     <div class="home-pm fd-f fd-border fd-margin">
         <header>🎖️作者榜</header>
         <ul>
-            <li class="fd-float">
+            <li class="fd-float" v-for="(item, index) in userPmList" :key="index">
                 <div class="pm-img fd-f"></div>
                 <div class="pm-main fd-f">
-                    <div class="pm-name fd-textover">大大的叹号</div>
-                    <div class="fd-textover">前端工程师 @ 大连华宇</div>
-                    <div class="fd-textover">javascript 贡献者</div>
-                </div>
-            </li>
-            <li class="fd-float">
-                <div class="pm-img fd-f"></div>
-                <div class="pm-main fd-f">
-                    <div class="pm-name fd-textover">大大的叹号</div>
-                    <div class="fd-textover">前端工程师 @ 大连华宇</div>
-                    <div class="fd-textover">javascript 贡献者</div>
-                </div>
-            </li>
-            <li class="fd-float">
-                <div class="pm-img fd-f"></div>
-                <div class="pm-main fd-f">
-                    <div class="pm-name fd-textover">大大的叹号</div>
-                    <div class="fd-textover">前端工程师 @ 大连华宇</div>
-                    <div class="fd-textover">javascript 贡献者</div>
-                </div>
-            </li>
-            <li class="fd-float">
-                <div class="pm-img fd-f"></div>
-                <div class="pm-main fd-f">
-                    <div class="pm-name fd-textover">大大的叹号</div>
-                    <div class="fd-textover">前端工程师 @ 大连华宇</div>
-                    <div class="fd-textover">javascript 贡献者</div>
-                </div>
-            </li>
-            <li class="fd-float">
-                <div class="pm-img fd-f"></div>
-                <div class="pm-main fd-f">
-                    <div class="pm-name fd-textover">大大的叹号</div>
-                    <div class="fd-textover">前端工程444444师 @ 大连华宇</div>
-                    <div class="fd-textover">javascript 贡献者</div>
+                    <div class="pm-name fd-textover">{{item.nickName}}</div>
+                    <div class="fd-textover">职业 @ {{item.profession}}</div>
+                    <div class="fd-textover">有{{item.visitSum}}人看过</div>
                 </div>
             </li>
         </ul>
@@ -53,7 +21,28 @@
 
 <script>
     export default {
-        
+        data() {
+            return {
+                userPmList: []
+            }
+        },
+        mounted() {
+            this.getUserPm()
+        },
+        methods: {
+            /**
+             * 请求用户排名
+             */
+            getUserPm() {
+                let param = {
+                    pageNum: 1,
+                    pageSize: 5
+                }
+                this.$axios.post(this.$api.home.queryRankList.url, param).then(res => {
+                    this.userPmList = res.data.pageList
+                })
+            }
+        }
     }
 </script>
 

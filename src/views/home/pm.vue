@@ -74,13 +74,11 @@
             display: flex;
             align-items: center;
             cursor: pointer;
-            transition: .3s ease-in-out;
-            bottom: 0px;
+            transition: .2s ease-in-out;
             &:hover{
-            position: relative;
+                position: relative;
                 box-shadow: 0 2px 7px rgba(0,0,0,.15);
-                border-radius: 3px;
-                bottom: 3px;
+                transform: scale(1,1.1);
             }
             .pm-img{
                 flex: 0 0 auto;

@@ -2,15 +2,29 @@
     <div class="home-article fd-border fd-f">
         <header>
             <ul class="fd-float">
-                <li class="long active">最热</li>
-                <li>最新</li>
+                <li class="long" :class="type ? '' : 'active'" @click="changeType(0)">最热</li>
+                <li :class="type ? 'active' : ''" @click="changeType(1)">最新</li>
             </ul>
         </header>
-        <ul>
-            <li v-for="(item, index) in articleList" :key="index">
+        <ul v-show="!type">
+            <li v-for="(item, index) in hotArticleList" :key="index">
                 <div class="content">
                     <div class="author">
                         <span class="red dian">热</span>
+                        <span class="dian author-hover">{{item.author.nickName}}</span>
+                        <span class="author-hover">{{item.subject.subjectName}}</span>
+                        <star :starNum="item.favourSum" :commentNum="item.commentSum" :viewNum="item.visitSum"></star>
+                    </div>
+                    <div class="title fd-textover">{{item.title}}</div>
+                    <div class="abstract fd-textover">{{item.summary}}</div>
+                </div>
+            </li>
+        </ul>
+        <ul v-show="type">
+            <li v-for="(item, index) in newArticleList" :key="index">
+                <div class="content">
+                    <div class="author">
+                        <span class="green dian">New</span>
                         <span class="dian author-hover">{{item.author.nickName}}</span>
                         <span class="author-hover">{{item.subject.subjectName}}</span>
                         <star :starNum="item.favourSum" :commentNum="item.commentSum" :viewNum="item.visitSum"></star>
@@ -31,26 +45,61 @@ export default {
     },
     data() {
         return {
+            hotPage: {
+                pageNum: 1,
+                pageSize: 10
+            },
+            newPage: {
+                pageNum: 1,
+                pageSize: 10
+            },
             type: 0,     // 文章列表类型0：最热，1：最新
-            articleList: [] // 文章列表数据
+            hotArticleList: [], // 最热文章列表数据
+            newArticleList: [] // 最新文章列表数据
+        }
+    },
+    watch: {
+        /**
+         * @description: 监听type变化，请求不同数据
+         * @param {type} 
+         * @return: 
+         */        
+        type() {
+            if (this.newPage.pageNum === 1) {
+                this.getData()
+            }
         }
     },
     mounted() {
-        this.getData(this.type)
+        this.$root.$on('getArticleList', this.getData)
     },
     methods: {
+        /**
+         * @description: 切换type，最新最热
+         * @param {type} 
+         * @return: 
+         */        
+        changeType(flag) {
+            this.type = flag
+        },
         /**
          * 请求文章列表
          */
         getData() {
             let param = {
-                type: 0,
-                pageNum: 1,
-                pageSize: 15
+                type: this.type,
+                pageNum: this.type ? this.newPage.pageNum : this.hotPage.pageNum,
+                pageSize: this.type ? this.newPage.pageSize : this.hotPage.pageSize
             }
             this.$axios.post(this.$api.home.queryListByType.url, param).then(res => {
                 if(res.data) {
-                    this.articleList = res.data.pageList
+                    if (this.type) {
+                        this.newArticleList.push(...res.data.pageList)
+                        this.newPage.pageNum++
+                    } else {
+                        this.hotArticleList.push(...res.data.pageList)
+                        this.hotPage.pageNum++
+                    }
                 } else {
                     this.$message({
                         message: '暂无数据',
@@ -122,6 +171,9 @@ export default {
                     }
                     .red{
                         color: red;
+                    }
+                    .green{
+                        color: #07be07;
                     }
                 }
                 .title{

@@ -27,11 +27,8 @@ export default {
     },
     methods: {
         test() {
-            console.log(this.value)
         },
-        mdChange(value, render) {
-            console.log(value)
-            console.log((render))
+        mdChange() {
         },
         // 绑定@imgAdd event
         imgAdd(pos, $file){
@@ -44,10 +41,10 @@ export default {
                data: formdata,
                headers: { 'Content-Type': 'multipart/form-data' },
            }).then((url) => {
+               url
                // 第二步.将返回的url替换到文本原位置![...](0) -> ![...](url)
                // $vm.$img2Url 详情见本页末尾
             //    $vm.$img2Url(pos, url);
-            console.log(url)
            })
         }
     },

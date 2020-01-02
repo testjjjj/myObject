@@ -3,19 +3,23 @@
         "age": 11
     },
     "queryListByType": {
-        "data|10": [
-            {
-                "author": {
-                    "name": "@cname",
-                    "special|1":["fe", "rd"],
-                    "specialName|1":["前端", "后端"]
-                },
-                "title": "感悟人生的真滴好啊新公司发神经哦",
-                "abstarct": "第三方士大夫顺丰速递就分手囧囧佛IE就死哦大家foe就搜到及佛教EOS奇偶发饿哦就水电费水电费就搜if大家哦时间偶的师傅送胜多负少",
-                "star|100-10000": 0,
-                "view|1000-50000": 0,
-                "comment|10-500": 0
-            }
-        ]
+        "data": {
+            "pageList|10": [
+                {
+                    "author": {
+                        "nickName": "@cname",
+                        "special|1":["fe", "rd"]
+                    },
+                    "subject": {
+                        "subjectName|1":["前端", "后端"]
+                    },
+                    "title": "感悟人生的真滴好啊新公司发神经哦",
+                    "summary": "第三方士大夫顺丰速递就分手囧囧佛IE就死哦大家foe就搜到及佛教EOS奇偶发饿哦就水电费水电费就搜if大家哦时间偶的师傅送胜多负少",
+                    "favourSum|100-10000": 0,
+                    "commentSum|1000-50000": 0,
+                    "visitSum|10-500": 0
+                }
+            ]
+        }
     }
 }

@@ -12,8 +12,8 @@ export default {
     },
     methods: {
       load(){
-            console.log(1111)
-        },
+        this.$root.$emit('getArticleList')
+      },
     }
 }
 </script>

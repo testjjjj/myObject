@@ -1,20 +1,11 @@
 <template>
-  <div id="app"  style="height:100%;overflow:auto" v-infinite-scroll="load">
-    <cz-head></cz-head>
+  <div id="app"  style="height:100%;overflow:hidden">
     <router-view></router-view>
   </div>
 </template>
 <script>
-import czHead from './views/cz-header/index'
 export default {
-    components: {
-        czHead
-    },
-    methods: {
-      load(){
-        this.$root.$emit('getArticleList')
-      },
-    }
+   
 }
 </script>
 <style lang="less">

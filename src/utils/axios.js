@@ -1,8 +1,8 @@
 /*
  * @Author: cjd
  * @Date: 2019-10-31 14:20:56
- * @LastEditTime: 2019-11-01 14:09:18
- * @LastEditors: Please set LastEditors
+ * @LastEditTime : 2020-01-03 16:16:19
+ * @LastEditors  : Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \display\src\api\index.js
  */
@@ -25,7 +25,7 @@ function apiAxios (method, url, params = null) {
             url: url,
             params: method === 'GET' ? params : null,
             data: method === 'POST' ? params : null,
-            timeout: 1000
+            timeout: 15000
         }).then(response => {
             if (response.status == 200){
                 resolve(response.data)

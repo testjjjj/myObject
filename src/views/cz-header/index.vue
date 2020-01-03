@@ -116,7 +116,8 @@ export default {
          * 跳转写文章
          */
         goWrite() {
-            this.$router.push('/write')
+            window.open('http://localhost:8000/write/')
+            // this.$router.push('/write')
         }
     }
 }
@@ -127,6 +128,8 @@ header{
     height: 65px;
     background-color: #fff;
     box-shadow: 0 2px 4px 0 rgba(0,0,0,.05);
+    position: fixed;
+    top: 0;
     .hd-logo{
         height: 100%;
         img{

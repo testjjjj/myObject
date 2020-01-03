@@ -15,7 +15,7 @@
                         <span class="author-hover">{{item.subject.subjectName}}</span>
                         <star :starNum="item.favourSum" :commentNum="item.commentSum" :viewNum="item.visitSum"></star>
                     </div>
-                    <div class="title fd-textover">{{item.title}}</div>
+                    <div class="title fd-textover" @click="goArticle(item)">{{item.title}}</div>
                     <div class="abstract fd-textover">{{item.summary}}</div>
                 </div>
             </li>
@@ -29,7 +29,7 @@
                         <span class="author-hover">{{item.subject.subjectName}}</span>
                         <star :starNum="item.favourSum" :commentNum="item.commentSum" :viewNum="item.visitSum"></star>
                     </div>
-                    <div class="title fd-textover">{{item.title}}</div>
+                    <div class="title fd-textover" @click="goArticle(item)">{{item.title}}</div>
                     <div class="abstract fd-textover">{{item.summary}}</div>
                 </div>
             </li>
@@ -72,6 +72,7 @@ export default {
     },
     mounted() {
         this.$root.$on('getArticleList', this.getData)
+        this.getData()
     },
     methods: {
         /**
@@ -108,7 +109,14 @@ export default {
                 }
             })
         },
-        
+        /**
+         * @description: 查看文章
+         * @param {type} 
+         * @return: 
+         */        
+        goArticle(Information) {
+            Information
+        }
     },
 }
 </script>

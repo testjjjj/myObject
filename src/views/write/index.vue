@@ -1,32 +1,67 @@
 <template>
     <div class="write">
         <div class="wr-head">
-            <button @click="test">发表文章</button>
+            <div class="title">
+                <el-input v-model="title" placeholder="请输入文章标题"></el-input>
+            </div>
+            <div class="release">
+                <el-button type="danger" size="medium" @click="release" plain disabled>保存草稿</el-button>
+                <el-button type="primary" size="medium" @click="release" plain>发表文章</el-button>
+            </div>
         </div>
-        <div class="wr-main"></div>
-        <mavon-editor 
-            toolbarsBackground="#dcdbdb"
-            previewBackground="#ffffff"
-            placeholder="写点啥老弟。。。"
-            codeStyle="atelier-lakeside-dark"
-            v-model="value"
-            ref=md
-            @imgAdd="imgAdd"
-            @change="mdChange"
-            class="mavon"/> 
+        <div class="wr-main">
+            <mavon-editor 
+                toolbarsBackground="#dcdbdb"
+                previewBackground="#ffffff"
+                placeholder="写点啥老弟。。。"
+                codeStyle="atelier-lakeside-dark"
+                v-model="value"
+                ref=md
+                @imgAdd="imgAdd"
+                @change="mdChange"
+                class="mavon"/> 
+        </div>
+        <el-dialog title="收货地址" :visible.sync="dialog" width="30%">
+            <re-dialog></re-dialog>
+        </el-dialog>
     </div>
 </template>
 
 <script>
 import axios from 'axios'
+import reDialog from './dialog'
 export default {
+    components: {
+        reDialog,
+    },
     data() {
         return {
-            value: '<p><h3>js原型</h3><ul><ul><li><a href="#_1">什么是原型</a></li></ul></ul></p><h2><a id="_1"></a>什么是原型</h2>'
+            title: 'tste',      // 文章标题
+            value: 'seteste',      // 文章html
+            dialog: false   // 弹窗
         }
     },
     methods: {
-        test() {
+        /**
+         * @description: 点击发表
+         * @param {type} 
+         * @return: 
+         */        
+        release() {
+            if(!this.title){
+                this.$message({
+                    message: '你没写标题啊，老弟！',
+                    type: 'warning'
+                })
+                return
+            } else if (!this.value) {
+                this.$message({
+                    message: '没写内容发表啥呢，老弟！',
+                    type: 'warning'
+                })
+                return
+            }
+            this.dialog = true
         },
         mdChange() {
         },
@@ -55,10 +90,26 @@ export default {
 .write{
     margin: 10px;
     width: calc(100% - 20px);
-    height: calc(100% - 85px);
-    .mavon{
+    height: calc(100% - 20px);
+    .wr-head{
+        height: 50px;
         width: 100%;
-        height: 100%;
+        background-color: #ffff;
+        border-radius: 5px;
+        margin-bottom: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        .title{
+            width: 700px;
+        }
+    }
+    .wr-main{
+        width: 100%;
+        height: calc(100% - 60px);
+        .mavon{
+            height: 100%;
+        }
     }
 }
 </style>

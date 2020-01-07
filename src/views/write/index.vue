@@ -21,7 +21,7 @@
                 @change="mdChange"
                 class="mavon"/> 
         </div>
-        <el-dialog title="收货地址" :visible.sync="dialog" width="30%">
+        <el-dialog title="发布文章" :visible.sync="dialog" width="30%">
             <re-dialog></re-dialog>
         </el-dialog>
     </div>

@@ -21,7 +21,7 @@
                 @change="mdChange"
                 class="mavon"/> 
         </div>
-        <el-dialog title="发布文章" :visible.sync="dialog" width="30%">
+        <el-dialog title="发布文章" class="test" :visible.sync="dialog" width="570px" top="10px">
             <re-dialog></re-dialog>
         </el-dialog>
     </div>
